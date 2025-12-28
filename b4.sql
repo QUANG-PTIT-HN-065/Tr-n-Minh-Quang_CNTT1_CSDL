@@ -1,0 +1,17 @@
+CREATE TABLE Teacher (
+    TeacherID VARCHAR(10) PRIMARY KEY,  
+    FullName  NVARCHAR(100) NOT NULL,  
+    Email     VARCHAR(100) NOT NULL,
+
+    CONSTRAINT UQ_Teacher_Email UNIQUE (Email)   
+);
+
+ALTER TABLE Subject
+ADD TeacherID VARCHAR(10) NOT NULL;
+
+ALTER TABLE Subject
+ADD CONSTRAINT FK_Subject_Teacher
+    FOREIGN KEY (TeacherID)
+    REFERENCES Teacher(TeacherID)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL;
